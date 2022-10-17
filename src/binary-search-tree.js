@@ -7,11 +7,13 @@ const { NotImplementedError } = require('../extensions/index.js');
 * using Node from extensions
 */
 class BinarySearchTree {
+
   constructor() {
-    this.root = null;
+    this._root = null;
   }
+
   root() {
-    return this.root
+    return this._root;
   }
 
   add(data) {
@@ -20,32 +22,32 @@ class BinarySearchTree {
       left: null,
       right: null,
     }
-    if (!this.root) {
-      this.root = value;
+    if (!this._root) {
+      this._root = value;
     } else {
-      this.addNode(this.root, value)
+      this.addNode(this._root, value)
     }
   }
-  addNode(root, value) {
-    if (root.data === value.data) {
+  addNode(_root, value) {
+    if (_root.data === value.data) {
       return;
-    } else if (root.data > value.data && root.left != null) {
+    } else if (_root.data > value.data && _root.left != null) {
       this.addNode(root.left, value)
       return
-    } else if (root.data < value.data && root.right != null) {
-      this.addNode(root.right, value)
+    } else if (_root.data < value.data && _root.right != null) {
+      this.addNode(_root.right, value)
       return
     }
-    if (root.data > value.data) {
-      root.left = value;
+    if (_root.data > value.data) {
+      _root.left = value;
       return;
     }
-    else if (root.data < value.data) {
-      root.right = value;
+    else if (_root.data < value.data) {
+      _root.right = value;
       return;
     }
   }
-  has(/* data */) {
+  has(data) {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   }
@@ -60,17 +62,16 @@ class BinarySearchTree {
     // remove line with error and write your code here
   }
 
-  min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  min(_root = this._root) {
+    if (_root.left != null) return this.min(root.left)
+    else return _root.value;
   }
 
-  max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  max(_root = this._root) {
+    if (_root.right != null) return this.max(root.right)
+    else return _root.data;
   }
 }
-
 
 module.exports = {
   BinarySearchTree
